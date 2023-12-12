@@ -1,0 +1,51 @@
+#!/bin/bash
+read -p 'Enter filename: ' filename
+head -4 $filename | tail +2
+echo
+#displaying last 5 lines
+tail -n 5 $filename
+echo
+#displaying first 5 lines
+head -n 5 $filename
+echo
+
+# USING SED TO PRINT LINES
+#n1=1
+#n2=5
+#sed -n "${n1},${n2}p" "$filename"
+#echo
+
+read -p 'Enter starting line :' n1
+read -p 'Enter ending line :' n2
+head -$n2 $filename | tail +$n1
+echo
+sed -n ${n1},${n2}p $filename
+echo
+count=$(wc -l < $filename)
+echo $count
+
+#FACTORIAL
+read -p 'ENter a number to find factorial of :' n
+fact=1
+for ((i=1;i<=n;i++))
+do
+    fact=$((fact*i))
+done
+echo $fact
+
+#PATTERN MATCHING
+read -p 'Enter a word :' w
+if [[ $w =~ ^[a-zA-Z]{1,}$ ]]
+then
+echo "pattern matched"
+else
+echo "pattern not matched"
+fi
+
+read -p 'Enter a date in the format yyyy-mm-dd :' d
+if [[ $d =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2} ]]
+then
+echo 'VAlid dob'
+else
+echo 'invalid dob'
+fi

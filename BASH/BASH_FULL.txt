@@ -1,0 +1,314 @@
+#!/bin/bash
+#this is a command
+
+# VARIABLES :
+
+echo Hello World # this is also a command
+echo our shell name $BASH # bash or shell name
+echo our shell version $BASH_VERSION # bash version
+echo the home directory $HOME # home directory
+echo the present working directory $PWD #present working directory
+
+# USER DEFINED VARIABLES :
+
+name=mark # name is a variable
+10val=10 # variable name should not start with number
+echo the name is $name
+
+# INPUT FROM THE USER :
+
+#getting one input
+echo Enter Name : 
+read name
+echo Entered Name : $name
+#getting multiplpe inputs
+echo Enter Names : 
+read name1 name2 name3
+echo Entered Names : $name1 $name2
+
+read -p "Usuername :" name1 #TO READ IN THE SAME LINE
+read -sp "Password :" name2  #TO READ A PASSWORD
+echo Entered Names : $name1 $name2
+
+# reading from an array
+echo "Enter names :"
+read -a Name
+echo "Names : ${Name[0]} ${Name[1]} ${Name[0]} ${Name[1]} "
+
+# If Statement (-eq ; -ne ; -gt ; -ge ; -lt ; -le)[Integer Comparision]
+
+a=10
+if [ $a -eq 10 ]
+then
+    echo "condition is true"
+fi
+
+# If Else Statement (= ; == ; != )[String Comparision]
+
+a=g
+if [ $a != h ]
+then
+    echo "condition is true"
+else
+    echo "condition is false"
+fi
+
+# If Elif Else Statement (< ; > ; -z )[String Comparision]
+
+a=g
+if [[ $a < h ]]
+then 
+    echo "var a is smaller than h"
+elif [[ $a > h ]]
+then
+    echo "var a is greater than h"
+else
+    echo "condition is false"
+fi
+
+#AND(&& ; -a) OPERATOR
+
+a=10
+if [ $a -gt 19 ] && [ $a -lt 50 ]
+then
+    echo valid age
+else
+    echo invalid age
+fi
+
+a=10
+if [ $a -gt 19 -a $a -lt 50 ]
+then
+    echo valid age
+else
+    echo invalid age
+fi
+
+a=10
+if [[ $a -gt 19 && $a -lt 50 ]]
+then
+    echo valid age
+else
+    echo invalid age
+fi
+
+#OR(|| ; -o) OPERATOR
+
+a=10
+if [ $a -gt 19 ] || [ $a -lt 50 ]
+then
+    echo valid age
+else
+    echo invalid age
+fi
+
+a=10
+if [ $a -gt 19 -o $a -lt 50 ]
+then
+    echo valid age
+else
+    echo invalid age
+fi
+
+a=10
+if [[ $a -gt 19 || $a -lt 50 ]]
+then
+    echo valid age
+else
+    echo invalid age
+fi
+
+#ARITHMETIC OPERATIONS
+
+n1=24
+n2=25
+n3=$((n1+n2))
+echo $((n1+n2))
+echo $((n1-n2))
+echo $((n1*n2))
+echo $((n1/n2))
+echo $((n1%n2))  
+echo $n3
+
+echo "$n1 + $n2" | bc
+echo "$n1 - $n2" | bc
+echo "$n1 * $n2" | bc
+echo "$n1 / $n2" | bc
+echo "scale = 2; $n1 / $n2 " | bc
+echo "scale = 2 ; sqrt($n2)"| bc
+echo "$n1 ^ $n2" | bc
+
+# ARRAYS 
+
+#os =("ub" "hl" "bvccc")
+#echo "${os[0]}"
+
+#WHILE LOOP
+
+n=2
+while [ $n -le 10 ]
+do
+    echo $n
+    n=$(( n+1 ))
+done
+
+#FOR LOOP
+
+for i in 1 2 3 4 5
+do
+    echo $i
+done
+
+for i in {0..10}
+do
+    echo $i
+done
+
+for i in {0..10..2}
+do
+    echo $i
+done
+
+for (( i=0; i<5; i++))
+do
+    echo $i
+done
+
+# FUNCTIONS
+
+function name(){
+    echo "Hello"
+}
+function print () {
+    echo $1 $2 $3
+}
+quit () {
+    exit
+}
+
+
+#!/bin/bash
+# SWAPPING NUMBERS (WITH TEMP VARIABLE)
+
+a=10
+b=20
+echo "Before a = $a b= $b "
+temp=$a
+a=$b
+b=$temp
+echo "After  a = $a b= $b "
+
+# SWAPPING NUMBERS (WITHOUT TEMP VARIABLE)
+
+a=$((a+b))
+b=$((a-b))
+a=$((a-b))
+echo "after 2n swap a= $a b =$b"
+
+# PRINT FIRST N NATURAL NUMBERS 
+
+read -p "Enter the number until which you want to print : " n
+for((i>0 ; i<=n ; i++))
+do
+	echo $i
+done
+# FIBONACI SERIES
+a=0
+b=1
+read -p "Enter the number until which you want to print : " n
+for (( i=0; i<n; i++ ))
+do
+	c=$((a+b))
+	echo $c
+	a=$b
+	b=$c
+done
+
+# FACTORIAL 
+read -p "Enter the numbeR U WANT TO FIND FACTORIAL : " n
+fact=1
+for (( i=1 ; i<=n ; i++ ))
+do
+	fact=$((fact*i))
+done
+
+echo $fact
+
+#ARMSTRONG NUMBER
+read -p "Enter A 3 digit number : " n
+h=$(( n/100 ))
+t=$(( (n-(h*100))/10 ))
+o=$(( (n-(h*100)-(t*10)) ))
+cube=$(( (h*h*h)+(t*t*t)+(o*o*o) ))
+echo $h $t $o $cube
+if [[ $n == $cube ]]
+then
+	echo "$n is an Armstrong number"
+else
+	echo "$n is not an Armstrong number"
+fi
+
+
+#!/bin/bash
+read -p "Enter filename :" filename
+
+#checks if file exists or not
+
+if [[ -e $filename ]] #checks if file exists or not
+then
+    echo "$filename file found"
+else
+    echo "$filename file not found"
+fi
+
+#checks if file is empty or not
+
+if [[ -s $filename ]] #checks if file is empty or not
+then
+    echo "$filename file not empty"
+else
+    echo "$filename file empty"
+fi
+
+
+# Checks if the file has write permmission or not and appending if the file has write permissions
+
+if [[ -w $filename ]]
+then
+    #cat >> $filename #for appending
+    cat > $filename #erases the data allready presents and frshly inserts data
+else
+    echo "file doesnt have write permissions"
+fi
+
+
+#  displaying 2 to 6 lines
+echo -n ` head -6 $filename | tail +2 ` # always its -(minus) for head and + for tail
+echo
+#displaying last 5 lines
+tail -n 5 $filename
+echo
+#displaying first 5 lines
+head -n 5 $filename
+echo
+#displaying 5th line 
+head -5 $filename | tail +5
+echo
+
+
+#PATTERN MATCHING
+read -p 'Enter a word :' w
+if [[ $w =~ ^[a-zA-Z]{1,}$ ]]
+then
+echo "pattern matched"
+else
+echo "pattern not matched"
+fi
+
+read -p 'Enter a date in the format yyyy-mm-dd :' d
+if [[ $d =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2} ]]
+then
+echo 'VAlid dob'
+else
+echo 'invalid dob'
+fi
